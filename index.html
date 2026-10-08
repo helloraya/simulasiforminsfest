@@ -198,44 +198,24 @@
 
             // ======= GANTI URL DI BAWAH INI ========
             // Masukkan link Web App Google Apps Script atau endpoint Formspree kamu di sini
-            const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_API_ENDPOINT_HERE/exec'; 
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLTR2UkroT_bctTmaeieIgdbbK51OdaeW4XobHmwkiYZFKxsYwc2gBPIrjBWyJQDjs/exec'; 
             // =======================================
 
             try {
-                // HAPUS BLOK SIMULASI INI NANTI KALAU SUDAH PAKAI URL ASLI
-                // Simulasi delay jaringan (2 detik) biar loadingnya kelihatan
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                /* UNCOMMENT KODE INI UNTUK INTEGRASI ASLI
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    // Tergantung setup GAS kamu, biasanya pakai form-urlencoded atau no-cors
-                    body: formData 
-                });
-                if(!response.ok) throw new Error('Gagal mengirim data');
-                */
+               // ======= GANTI PAKE URL WEB APP KAMU ========
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycb.../exec'; 
 
-                // Jika sukses
-                alertSuccess.classList.remove('hidden');
-                form.reset();
-                customRoleDiv.classList.add('hidden'); // Reset input lainnya
-            } catch (error) {
-                console.error('Error!', error.message);
-                alertError.classList.remove('hidden');
-            } finally {
-                // Kembalikan tombol ke state awal
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-                btnText.textContent = 'Kirim Pendaftaran';
-                btnLoader.classList.add('hidden');
-                
-                // Hilangkan alert setelah 5 detik
-                setTimeout(() => {
-                    alertSuccess.classList.add('hidden');
-                    alertError.classList.add('hidden');
-                }, 5000);
-            }
-        });
-    </script>
-</body>
-</html>
+try {
+    // Kita ubah datanya jadi URLSearchParams biar GAS gampang bacanya dan gak kena CORS
+    const searchParams = new URLSearchParams(dataObj);
+
+    const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: searchParams
+    });
+
+    // Jika sukses
+    alertSuccess.classList.remove('hidden');
+    form.reset();
+    customRoleDiv.classList.add('hidden');
+} catch (error) { ... }
