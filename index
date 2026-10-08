@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Lomba INSFest (ELEVATE)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Custom warna Navy & Terracotta
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0f172a',      // Modern dark navy
+                        terracotta: '#d95e39' // Warm terracotta
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Animasi loading sederhana */
+        .loader {
+            border-top-color: transparent;
+            animation: spinner 0.6s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-10 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+
+    <div class="max-w-xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <!-- Header Section -->
+        <div class="bg-navy px-8 py-10 text-center">
+            <h1 class="text-3xl font-bold text-white tracking-tight mb-2">INSFest (ELEVATE)</h1>
+            <p class="text-gray-300 text-sm">Formulir Registrasi Peserta Lomba</p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="px-8 py-8">
+            <form id="registrationForm" class="space-y-6">
+                
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address <span class="text-terracotta">*</span></label>
+                    <input type="email" id="email" name="email" required 
+                        class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-navy focus:border-navy transition-colors outline-none"
+                        placeholder="contoh@email.com">
+                </div>
+
+                <!-- No HP -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">No. WhatsApp <span class="text-terracotta">*</span></label>
+                    <input type="tel" id="phone" name="phone" required 
+                        class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-navy focus:border-navy transition-colors outline-none"
+                        placeholder="081234567890">
+                </div>
+
+                <!-- Nama Pengisi -->
+                <div>
+                    <label for="fullname" class="block text-sm font-medium text-gray-700">Nama Lengkap <span class="text-terracotta">*</span></label>
+                    <input type="text" id="fullname" name="fullname" required 
+                        class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-navy focus:border-navy transition-colors outline-none"
+                        placeholder="Masukkan nama lengkapmu">
+                </div>
+
+                <!-- Peran Pengisi -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Peran <span class="text-terracotta">*</span></label>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="role" value="Guru/Pendamping" required class="h-4 w-4 text-navy focus:ring-navy border-gray-300">
+                            <span class="ml-3 text-sm text-gray-700 font-medium">Guru / Pendamping</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="role" value="Siswa" class="h-4 w-4 text-navy focus:ring-navy border-gray-300">
+                            <span class="ml-3 text-sm text-gray-700 font-medium">Siswa</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="role" value="Orang Tua" class="h-4 w-4 text-navy focus:ring-navy border-gray-300">
+                            <span class="ml-3 text-sm text-gray-700 font-medium">Orang Tua</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="role" id="roleLainnya" value="Lainnya" class="h-4 w-4 text-navy focus:ring-navy border-gray-300">
+                            <span class="ml-3 text-sm text-gray-700 font-medium">Lainnya</span>
+                        </label>
+                    </div>
+                    <!-- Input text dinamis untuk "Lainnya" -->
+                    <div id="customRoleDiv" class="mt-3 hidden transition-all duration-300">
+                        <input type="text" id="customRoleInput" name="customRole" 
+                            class="block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-navy focus:border-navy transition-colors outline-none"
+                            placeholder="Sebutkan peranmu...">
+                    </div>
+                </div>
+
+                <!-- Asal Sekolah -->
+                <div>
+                    <label for="school" class="block text-sm font-medium text-gray-700">Asal Sekolah <span class="text-terracotta">*</span></label>
+                    <input type="text" id="school" name="school" required 
+                        class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-navy focus:border-navy transition-colors outline-none"
+                        placeholder="Contoh: SMP Indonesia Natural School">
+                </div>
+
+                <!-- Asal Daerah Sekolah -->
+                <div>
+                    <label for="region" class="block text-sm font-medium text-gray-700">Asal Daerah Sekolah <span class="text-terracotta">*</span></label>
+                    <input type="text" id="region" name="region" required 
+                        class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-navy focus:border-navy transition-colors outline-none"
+                        placeholder="Contoh: Depok, Jawa Barat">
+                </div>
+
+                <!-- Alert Messages -->
+                <div id="alertSuccess" class="hidden rounded-lg bg-green-50 p-4 border border-green-200">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-green-800">Yuhuu! Registrasi berhasil dikirim.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="alertError" class="hidden rounded-lg bg-red-50 p-4 border border-red-200">
+                    <p class="text-sm font-medium text-red-800">Waduh, ada yang salah nih. Coba lagi ya!</p>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" id="submitBtn" 
+                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-terracotta hover:bg-navy focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy transition-all duration-300">
+                        <span id="btnText">Kirim Pendaftaran</span>
+                        <div id="btnLoader" class="hidden ml-2 w-4 h-4 border-2 border-white rounded-full loader"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Logika Toggle Radio Button "Lainnya"
+        const roleRadios = document.querySelectorAll('input[name="role"]');
+        const customRoleDiv = document.getElementById('customRoleDiv');
+        const customRoleInput = document.getElementById('customRoleInput');
+
+        roleRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if(e.target.id === 'roleLainnya' && e.target.checked) {
+                    customRoleDiv.classList.remove('hidden');
+                    customRoleInput.setAttribute('required', 'true');
+                } else {
+                    customRoleDiv.classList.add('hidden');
+                    customRoleInput.removeAttribute('required');
+                    customRoleInput.value = ''; // Reset isi teksnya
+                }
+            });
+        });
+
+        // Logika Submit Form
+        const form = document.getElementById('registrationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+        const alertSuccess = document.getElementById('alertSuccess');
+        const alertError = document.getElementById('alertError');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // 1. Ambil data dari form
+            const formData = new FormData(form);
+            
+            // Format data biar gampang dikirim (opsional, tergantung butuh JSON atau FormData)
+            const dataObj = Object.fromEntries(formData.entries());
+            if(dataObj.role === 'Lainnya') {
+                dataObj.role = dataObj.customRole; // Timpa role dengan isian manual
+            }
+            delete dataObj.customRole; // Hapus properti temporary
+
+            // 2. UI State: Ubah tombol jadi mode loading
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+            btnText.textContent = 'Mengirim...';
+            btnLoader.classList.remove('hidden');
+            alertSuccess.classList.add('hidden');
+            alertError.classList.add('hidden');
+
+            // ======= GANTI URL DI BAWAH INI ========
+            // Masukkan link Web App Google Apps Script atau endpoint Formspree kamu di sini
+            const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_API_ENDPOINT_HERE/exec'; 
+            // =======================================
+
+            try {
+                // HAPUS BLOK SIMULASI INI NANTI KALAU SUDAH PAKAI URL ASLI
+                // Simulasi delay jaringan (2 detik) biar loadingnya kelihatan
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                /* UNCOMMENT KODE INI UNTUK INTEGRASI ASLI
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    // Tergantung setup GAS kamu, biasanya pakai form-urlencoded atau no-cors
+                    body: formData 
+                });
+                if(!response.ok) throw new Error('Gagal mengirim data');
+                */
+
+                // Jika sukses
+                alertSuccess.classList.remove('hidden');
+                form.reset();
+                customRoleDiv.classList.add('hidden'); // Reset input lainnya
+            } catch (error) {
+                console.error('Error!', error.message);
+                alertError.classList.remove('hidden');
+            } finally {
+                // Kembalikan tombol ke state awal
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                btnText.textContent = 'Kirim Pendaftaran';
+                btnLoader.classList.add('hidden');
+                
+                // Hilangkan alert setelah 5 detik
+                setTimeout(() => {
+                    alertSuccess.classList.add('hidden');
+                    alertError.classList.add('hidden');
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
